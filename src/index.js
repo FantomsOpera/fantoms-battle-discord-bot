@@ -2,9 +2,9 @@ const { Client, Intents } = require("discord.js")
 
 const ENV = {
   botToken: "yourDiscordToken",
-  channelId: "898666329521934347",
-  interval: 60000,
-  amount: 420,
+  channelId: "899541450574921778",
+  interval: 5000,
+  amount: 200,
   startIndex: 0,
   killerEmojis: ["🗡️", "🔫", "🔪", "⚔️"],
   killedEmojis: ["💀", "☠️", "🔥", "💥"],
@@ -15,6 +15,18 @@ const randomItem = (array) => {
 }
 const randomIndex = (array) => {
   return Math.floor(Math.random() * array.length)
+}
+
+function makeEmbed(title, sub, id) {
+  var fantomEmbed = new MessageEmbed()
+	.setColor('#0099ff')
+	.setTitle(title)
+	.setURL('https://fantoms.art/')
+	.setDescription(sub)
+	.setImage('https://mint.fantoms.art/imagesa/'+id+'.png')
+	.setTimestamp()
+
+  return fantomEmbed;
 }
 
 const startDiscordClient = () => {
@@ -55,12 +67,13 @@ const start = async () => {
 
     // win condition
     if (aliveKittens.length === 1) {
-      msg = `.\n\n🎉🎉🎉 **Winner: #${aliveKittens[0]}** 🎉🎉🎉\n\nVictims: ${
+      msg = `.\n\n🎉🎉🎉 Winner: #${aliveKittens[0]} 🎉🎉🎉\n\nVictims: ${
         killcount[aliveKittens[0]].length > 0
           ? killcount[aliveKittens[0]].map((x) => "#" + x).join(", ")
           : "none"
       }\n\n.`
-      channel.send(msg)
+      var embed = fantomEmbed(msg, "The owner of this fantom will recieve 1FTM, when @RandomZ 🗕🗗🗙#0450 sees this","https://mint.fantoms.art/imagesa/" + aliveKittens[0] + ".png")
+      channel.send({embeds: [embed]})
       console.log(msg)
       clearInterval(timerId)
       return
@@ -81,7 +94,7 @@ const start = async () => {
     msg += `.\n\n`
     msg += `${randomItem(
       ENV.killedEmojis
-    )} **Kitten #${deadId} was slain.** Victims: ${
+    )} **Fantom #${deadId} was slain.** Victims: ${
       killcount[deadId].length > 0
         ? killcount[deadId].map((x) => "#" + x).join(", ")
         : "none"
@@ -98,8 +111,21 @@ const start = async () => {
     msg += `Total Alive: ${aliveKittens.length}`
     msg += `\n\n.`
 
+    var embed = fantomEmbed(`${randomItem(
+      ENV.killedEmojis
+    )} **Fantom #${deadId} was slain.** Victims: ${
+      killcount[deadId].length > 0
+        ? killcount[deadId].map((x) => "#" + x).join(", ")
+        : "none"
+    }`, `${randomItem(
+      ENV.killerEmojis
+    )} **Killed by #${killerId}.** Victims: ${
+      killcount[killerId].length > 0
+        ? killcount[killerId].map((x) => "#" + x).join(", ")
+        : "none"
+    }`,deadId)
     console.log(msg)
-    channel.send(msg)
+    channel.send({ embeds: [embed] })
   }
 
   let timerId = setInterval(killOne, ENV.interval)
