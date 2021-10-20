@@ -1,13 +1,13 @@
-const { Client, Intents } = require("discord.js")
+const { Client, Intents, MessageEmbed } = require("discord.js")
 
 const ENV = {
-  botToken: "yourDiscordToken",
+  botToken: "ODk5NTQyODY0MTc3MDI5MTMw.YW0Skw.xQO82VWu5CQ3rOf3EvM4brlBybI",
   channelId: "899541450574921778",
-  interval: 5000,
+  interval: 15000,
   amount: 200,
   startIndex: 0,
-  killerEmojis: ["🗡️", "🔫", "🔪", "⚔️"],
-  killedEmojis: ["💀", "☠️", "🔥", "💥"],
+  killerEmojis: ["ðŸ—¡ï¸", "ðŸ”«", "ðŸ”ª", "âš”ï¸"],
+  killedEmojis: ["ðŸ’€", "â˜ ï¸", "ðŸ”¥", "ðŸ’¥"],
 }
 
 const randomItem = (array) => {
@@ -17,7 +17,7 @@ const randomIndex = (array) => {
   return Math.floor(Math.random() * array.length)
 }
 
-function makeEmbed(title, sub, id) {
+function fantomEmbed(title, sub, id) {
   var fantomEmbed = new MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle(title)
@@ -67,12 +67,12 @@ const start = async () => {
 
     // win condition
     if (aliveKittens.length === 1) {
-      msg = `.\n\n🎉🎉🎉 Winner: #${aliveKittens[0]} 🎉🎉🎉\n\nVictims: ${
+      msg = `.\n\nðŸŽ‰ðŸŽ‰ðŸŽ‰ Winner: #${aliveKittens[0]} ðŸŽ‰ðŸŽ‰ðŸŽ‰\n\nVictims: ${
         killcount[aliveKittens[0]].length > 0
           ? killcount[aliveKittens[0]].map((x) => "#" + x).join(", ")
           : "none"
       }\n\n.`
-      var embed = fantomEmbed(msg, "The owner of this fantom will recieve 1FTM, when @RandomZ 🗕🗗🗙#0450 sees this","https://mint.fantoms.art/imagesa/" + aliveKittens[0] + ".png")
+      var embed = fantomEmbed(msg, "The owner of this fantom will recieve 1FTM, when @RandomZ ðŸ—•ðŸ——ðŸ—™#0450 sees this","https://mint.fantoms.art/imagesa/" + aliveKittens[0] + ".png")
       channel.send({embeds: [embed]})
       console.log(msg)
       clearInterval(timerId)
@@ -123,7 +123,7 @@ const start = async () => {
       killcount[killerId].length > 0
         ? killcount[killerId].map((x) => "#" + x).join(", ")
         : "none"
-    }`,deadId)
+    } \n\n Total Alive: ${aliveKittens.length}`,deadId)
     console.log(msg)
     channel.send({ embeds: [embed] })
   }
