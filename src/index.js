@@ -1,7 +1,7 @@
 const { Client, Intents, MessageEmbed } = require("discord.js")
 
 const ENV = {
-  botToken: "ODk5NTQyODY0MTc3MDI5MTMw.YW0Skw.xQO82VWu5CQ3rOf3EvM4brlBybI",
+  botToken: "ODDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD.DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
   channelId: "899541450574921778",
   interval: 15000,
   amount: 200,
